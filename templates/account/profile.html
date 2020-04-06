@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+       <div class="row">
+            <div class="col-six tab-full">
+
+                <div class="w3-card-4" style="width:50%">
+                  <img src="{{ model.pic.url }}" alt="Person" style="width:100%">
+                  <div class="w3-container">
+                    <center><p>Profile Picture</p></center>
+                  </div>
+            </div>
+
+            </div>
+            <div class="col-six tab-full">
+
+                <div class="w3-card-4" style="width:90%">
+                  <div class="w3-container">
+                    <form name="cForm" id="cForm" method="POST">
+                        
+                        {% csrf_token %}
+                                        <fieldset>
+
+                                            <div class="form-field">
+                                                Username<input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="{{ model.username }}" readonly>
+                                            </div>
+
+                                            <div class="form-field">
+                                                First Name<input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="{{ model.first_name }}" readonly>
+                                            </div>
+
+                                            <div class="form-field">
+                                                Last Name<input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="{{ model.last_name }}" readonly>
+                                            </div>
+
+                                            <div class="form-field">
+                                                Last Name<input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="{{ model.bio }}" readonly>
+                                            </div>
+
+                                        </fieldset>
+                                    </form> <!-- end form -->
+                                    {% if user.is_authenticated %}
+                                        {% if user.username == model.username %}
+                                            <a href="{% url 'ProfileUpdateView' model.username %}"><button type="" class="submit btn btn--primary full-width">Update</button></a>
+                                        {% endif %}
+                                        
+                                    {% endif %}
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section> <!-- s-content -->
+
+{% endblock %}

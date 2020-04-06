@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} BBlog {% endblock %}
+
+
+
+{% block content %}
+
+<style type="text/css">
+    .s-pageheader--home{
+        min-height: 20px;
+    }
+</style>
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+
+            <div class="col-full s-content__main">
+
+                <h3>Create A New Post</h3>
+                {% if messages %}
+                    {% for msg in messages %}
+                        <h4 class="alert-box alert-box--info hideit">{{msg}}</h4>
+                    {% endfor %}
+                {% endif %}
+
+                <form enctype="multipart/form-data" name="cForm" id="cForm" method="POST">
+                    <fieldset>
+                       
+                        <div class="form-field">
+                            <input name="title" minlength="3" maxlength="30" type="text" id="cName" class="full-width" placeholder="Title">
+                        </div>
+
+                        <div class="form-field">
+                           <input name="slug" minlength="3" maxlength="30" type="text" id="cName" class="full-width" placeholder="Slug">
+                        </div>
+
+                        <div class="form-field">
+                          Body : {{ form.body }}
+                          {{ form.media }}
+                        </div>
+
+                        <div class="form-field">
+                            Category : {{ form.category }}
+                        </div>
+
+                        <div class="form-field">
+                          Thumbnail : {{ form.thumbnail }}
+                        </div>
+
+                        <div class="form-field">
+                            Tag : {{ form.tag }}
+                        </div>
+
+                        <div class="form-field">
+                            Status : {{ form.status }}
+                        </div>
+
+                          
+                          {% csrf_token %}
+
+                        <button type="submit" class="submit btn btn--primary full-width">Save Post</button>
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row top">
+
+            {% include 'Blog/include/popular.html' %}
+            {% include 'Blog/include/about_tag.html' %}
+
+    </section> <!-- end s-extra -->
+    
+{% endblock %}

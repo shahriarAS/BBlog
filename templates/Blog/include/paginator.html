@@ -1,0 +1,20 @@
+            <div class="row">
+                <div class="col-full">
+                    <nav class="pgn">
+                        <ul>
+                            {% if page_obj.has_previous %}
+                                <li><a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                                <li><a class="pgn__num" href="?page=1">First</a></li>
+                                
+                            {% endif %}
+                                <li><span class="pgn__num current">{{ page_obj.number }}</span></li>
+                                <li><span class="pgn__num dots">........................</span></li>
+                                
+                            {% if page_obj.has_next %}
+                                <li><a class="pgn__next" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                <li><a class="pgn__num" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>

@@ -1,0 +1,70 @@
+<div class="pageheader-content row">
+            <div class="col-full">
+
+                <div class="featured">
+
+                    <div class="featured__column featured__column--big">
+                        {% with all_post=all_post|dictsortreversed:"count" %}
+                            {% for post in all_post|slice:"1" %}
+
+                                <div class="entry" style="background-image:url({{ post.thumbnail.url  }});">
+
+                                    <div class="entry__content">
+                                        <span class="entry__category"><a href="{% url 'CategoryView' post.category.id %}">{{ post.category }}</a></span>
+
+                                        <h1><a href="{% url 'Blog_Detail' post.slug %}" title="">{{ post.title }}</a></h1>
+
+                                        <div class="entry__info">
+                                            <a href="#0" class="entry__profile-pic">
+                                                <img class="avatar" src="{{ post.author.pic.url }}" alt="">
+                                            </a>
+
+                                            <ul class="entry__meta">
+                                                <li><a href="{% url 'AuthorView' post.author.username %}">{{ post.author }}</a></li>
+                                                <li>{{ post.created_at }}</li>
+                                                <li>View : {{ post.count }}</li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- end entry__content -->
+
+                                </div> <!-- end entry -->
+                            {% endfor %}
+                        {% endwith %}
+                    </div> <!-- end featured__big -->
+
+                    <div class="featured__column featured__column--small">
+
+                        {% with model=model|dictsortreversed:"count" %}
+                            {% for post in model|slice:"2:4" %}
+
+                                <div class="entry" style="background-image:url({{ post.thumbnail.url  }});">
+
+                                    <div class="entry__content">
+                                        <span class="entry__category"><a href="{% url 'CategoryView' post.category.id %}">{{ post.category }}</a></span>
+
+                                        <h1><a href="{% url 'Blog_Detail' post.slug %}" title="">{{ post.title }}</a></h1>
+
+                                        <div class="entry__info">
+                                            <a href="#0" class="entry__profile-pic">
+                                                <img class="avatar" src="{{ post.author.pic.url }}" alt="">
+                                            </a>
+
+                                            <ul class="entry__meta">
+                                                <li><a href="#0">{{ post.author }}</a></li>
+                                                <li>{{ post.created_at }}</li>
+                                                <li>View : {{ post.count }}</li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- end entry__content -->
+
+                                </div> <!-- end entry -->
+                            {% endfor %}
+                        {% endwith %}
+
+                    </div> <!-- end featured__small -->
+                </div> <!-- end featured -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end pageheader-content row -->
+
+    </section> <!-- end s-pageheader -->

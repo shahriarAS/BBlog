@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} BBlog {% endblock %}
+
+
+
+{% block content %}
+
+<style type="text/css">
+    .s-pageheader--home{
+        min-height: 20px;
+    }
+</style>
+
+{% for msg in messages %}
+    <h4 class="alert-box alert-box--success hideit">{{msg}}</h4>
+{% endfor %}
+
+
+{% if header == "category" %}
+    <h4 class="alert-box alert-box--success hideit">All Post of Category "{{ category_slug }}"</h4>
+{% elif header == "author" %}
+    <h4 class="alert-box alert-box--success hideit">All Post by "{{ author_slug }}"</h4>
+{% endif %}
+
+
+{% if is_featured == True %}
+    {% include 'Blog/include/featured.html' %}
+{% endif %}
+
+        <!-- s-content
+        ================================================== -->
+        <section class="s-content">
+
+            
+            <div class="row masonry-wrap">
+
+                <div class="masonry">
+
+
+                    <div class="grid-sizer"></div>
+
+                    {% for post in page_obj %}
+
+                            <article class="masonry__brick entry format-standard" data-aos="fade-up">
+                                    
+                                <div class="entry__thumb">
+                                    <a href="{% url 'Blog_Detail' post.slug %}" class="entry__thumb-link">
+                                        <img src="{{ post.thumbnail.url }}" 
+                                                srcset="{{ post.thumbnail.url }} 1x, {{ post.thumbnail.url }} %} 2x" alt="">
+                                    </a>
+                                </div>
+                
+                                <div class="entry__text">
+                                    <div class="entry__header">
+                                        
+                                        <div class="entry__date">
+                                            <a href="{% url 'Blog_Detail' post.slug %}">{{ post.created_at }}</a>
+                                            <p>Total {{ post.count }} Views</p>
+                                        </div>
+                                        <h1 class="entry__title"><a href="{% url 'Blog_Detail' post.slug %}">{{ post.title }}</a></h1>
+                                        
+                                    </div>
+                                    <div class="entry__excerpt">
+                                        <p>
+                                            {% autoescape off %}
+                                                <!-- {{ body|linebreaks|force_escape }} -->
+                                                {{ post.body|striptags|truncatewords:40 }}
+                                            {% endautoescape %}
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                
+                            </article> <!-- end article -->
+                    {% endfor %}
+
+
+                </div> <!-- end masonry -->
+            </div> <!-- end masonry-wrap -->
+
+            {% include 'Blog/include/paginator.html' %}
+
+        </section> <!-- s-content -->       
+
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row top">
+
+            {% include 'Blog/include/popular.html' %}
+            {% include 'Blog/include/about_tag.html' %}
+
+    </section> <!-- end s-extra -->
+    
+{% endblock %}

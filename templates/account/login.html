@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+
+                <h3>Login Here</h3>
+
+                {% if messages %}
+                    {% for msg in messages %}
+                        {% if msg.tags == "error" %}
+                            <h4 class="alert-box alert-box--error hideit">{{msg}}</h4>
+                        {% elif msg.tags == "success" %}
+                            <h4 class="alert-box alert-box--success hideit">{{msg}}</h4>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <form name="cForm" id="cForm" method="POST">
+                    <fieldset>
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button type="submit" class="submit btn btn--primary full-width">Login</button>
+
+                    </fieldset>
+                    
+                </form> <!-- end form -->
+
+                <center><h3>Or</h3>
+                <a href="{% url 'password_reset' %}"><button type="submit" class="submit btn btn--secondary half-width" style="width: 50%">Password Reset</button></a>
+                <a href="{% url 'SignUpView' %}"><button type="submit" class="submit btn btn--secondary half-width" style="width: 50%">   Sign Up</button></a></center>
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+{% endblock %}

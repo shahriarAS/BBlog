@@ -1,0 +1,104 @@
+<!-- comments
+        ================================================== -->
+        <div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+
+                    <h3 class="h2">5 Comments</h3>
+
+                    <!-- commentlist -->
+                    <ol class="commentlist">
+                    {% for comm in comments %}
+                        <li class="thread-alt depth-1 comment">
+
+                            <div class="comment__avatar">
+                                <img width="50" height="50" class="avatar" src="images/avatars/user-04.jpg" alt="">
+                            </div>
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                <cite>{{ comm.name }}</cite>
+
+                                <div class="comment__meta">
+                                    <time class="comment__time">{{ comm.created_at }}</time>
+                                    <a class="reply" href="#0">Reply</a>
+                                </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p>{{ comm.body | safe }}</p>
+                                </div>
+
+                            </div>
+
+                            {% for reply in reply_comment %}
+                            {% if reply.parent == comm %}
+
+                            <ul class="children">
+
+                                <li class="depth-2 comment">
+
+                                    <div class="comment__avatar">
+                                        <img width="50" height="50" class="avatar" src="images/avatars/user-03.jpg" alt="">
+                                    </div>
+
+                                    <div class="comment__content">
+
+                                        <div class="comment__info">
+                                            <cite>{{ reply.name }}</cite>
+
+                                            <div class="comment__meta">
+                                                <time class="comment__time">{{ reply.created_at }}</time>
+                                                <a class="reply" href="#0">Reply</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="comment__text">
+                                            <p>{{ reply.body | safe }}</p>
+                                        </div>
+
+                                    </div>
+
+
+                                </li>
+
+                            </ul>
+                            {% endif %}
+                            {% endfor %}
+
+                        </li> <!-- end comment level 1 -->
+                    {% endfor %}
+                    </ol> <!-- end commentlist -->
+                
+
+
+                    <!-- respond
+                    ================================================== -->
+                    <div class="respond">
+
+                        <h3 class="h2">Add Comment</h3>
+
+                        <form id="contactForm" method="POST">
+                            <fieldset>
+
+                                {{ comment_form }}
+                                {% csrf_token %}
+
+                                <button type="submit" class="submit btn--primary btn--large full-width">Submit</button>
+
+                            </fieldset>
+                        </form> <!-- end form -->
+
+                    </div> <!-- end respond -->
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div> <!-- end comments-wrap -->
+
+
+
+
+      

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %} BBlog {% endblock %}
+
+
+
+{% block content %}
+
+<style type="text/css">
+    .s-pageheader--home{
+        min-height: 20px;
+    }
+</style>
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow s-content--no-padding-bottom">
+
+        <article class="row format-standard">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    {{ post.title }}
+                </h1>
+                <ul class="s-content__header-meta">
+                    <li class="date">{{ post.created_at }}</li>
+                    <li class="cat">
+                        In
+                        <a href="{% url 'CategoryView' post.category.id %}">{{ post.category }}</a>
+                    </li>
+                    <li>View : {{ post.count }}</li>
+                </ul>
+            </div> <!-- end s-content__header -->
+    
+            <div class="s-content__media col-full">
+                <center><div class="s-content__post-thumb">
+                    <img src="{{ post.thumbnail.url }}" 
+                         srcset="{{ post.thumbnail.url }} 2000w, 
+                                 {{ post.thumbnail.url }} 1000w, 
+                                 {{ post.thumbnail.url }} 500w" 
+                         sizes="(max-width: 2000px) 100vw, 2000px" alt="" >
+                </div></center>
+            </div> <!-- end s-content__media -->
+
+            <div class="col-full s-content__main">
+
+                <b><p class="lead">{{ post.body|truncatewords:50|safe }}</p><b>
+
+                <p>{{ post.body|safe }}</p>
+
+                        
+                            
+                        </p>
+                {% if user.is_authenticated %}
+                    {% if req_user == post_author %}
+                    <p>
+                        <a class="btn btn--stroke half-width" href="{% url 'PostUpdate' post.slug %}">Edit</a>
+                        <a class="btn btn--stroke half-width" href="{% url 'PostDelete' post.slug %}">Delete</a>
+                    </p>
+                    {% endif %}
+                {% endif %}
+
+
+                <p class="s-content__tags">
+                    <span>Post Tags</span>
+
+                    <span class="s-content__tag-list">
+                        {% for tg in post.tag %}
+                            <a href="#0">{{ tg }}</a>
+                        {% endfor %}
+                    </span>
+                </p> <!-- end s-content__tags -->
+
+                <div class="s-content__author">
+                    <img src="{{ post.author.pic.url }}" alt="">
+
+                    <div class="s-content__author-about">
+                        <h4 class="s-content__author-name">
+                            {% if post.author.first_name or post.author.last_name %}
+                                <a href="{% url 'ProfileView' post.author.username %}">{{ post.author.first_name }} {{ post.author.last_name }}</a>
+                            {% else %}
+                                <a href="{% url 'ProfileView' post.author.username %}">{{ post.author.username }}</a>
+                            {% endif %}
+                        </h4>
+                    
+                        <p>{{ post.author.bio }}
+                        </p>
+
+                        <ul class="s-content__author-social">
+                            {% if post.author.fb %}
+                                <li><a href="{{ post.author.fb }}">Facebook</a></li>
+                            {% endif %}
+                            {% if post.author.fb %}
+                                <li><a href="{{ post.author.tw }}">Twitter</a></li>
+                            {% endif %}
+                            {% if post.author.fb %}
+                                <li><a href="{{ post.author.ins }}">Instagram</a></li>
+                            {% endif %}
+                            {% if post.author.fb %}
+                                <li><a href="{{ post.author.web }}">Website</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="s-content__pagenav">
+                    <div class="s-content__nav">
+                        <div class="s-content__prev">
+                            <a href="#0" rel="prev">
+                                <span>Previous Post</span>
+                                Tips on Minimalist Design 
+                            </a>
+                        </div>
+                        <div class="s-content__next">
+                            <a href="#0" rel="next">
+                                <span>Next Post</span>
+                                Less Is More 
+                            </a>
+                        </div>
+                    </div>
+                </div> <!-- end s-content__pagenav -->
+
+            </div> <!-- end s-content__main -->
+
+        </article>
+
+
+        {% include 'Blog/include/comments.html' %}
+    </section> <!-- s-content -->
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row top">
+
+            {% include 'Blog/include/popular.html' %}
+            {% include 'Blog/include/about_tag.html' %}
+
+    </section> <!-- end s-extra -->
+    
+{% endblock %}

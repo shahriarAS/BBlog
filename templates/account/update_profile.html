@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+
+                <h3>Update Your Profile</h3>
+
+                {% if messages %}
+                    {% for msg in messages %}
+                        {% if msg.tags == "error" %}
+                            <h4 class="alert-box alert-box--error hideit">{{msg}}</h4>
+                        {% elif msg.tags == "success" %}
+                            <h4 class="alert-box alert-box--success hideit">{{msg}}</h4>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <form enctype="multipart/form-data" name={{ model.username }} id="cForm" method="POST">
+                    <fieldset>
+
+                        {% csrf_token %}
+
+                        <div class="form-field">
+                            <input name="first_name" minlength="3" maxlength="30" type="text" id="cName" class="full-width" placeholder="First Name" value={{ model.first_name }}>
+                        </div>
+
+                        <div class="form-field">
+                            <input name="last_name" minlength="3" maxlength="30" type="text" id="cEmail" class="full-width" placeholder="Last Name" value={{ model.last_name }}>
+                        </div>
+
+                        <div class="form-field">
+                            <input name="bio" minlength="20" maxlength="300" type="text" id="cName" class="full-width" placeholder="Bio" value={{ model.bio }}>
+                        </div>
+
+                        Profile Picture:<br>
+                        {{ form.pic }}
+
+                        <button type="submit" class="submit btn btn--primary full-width">Submit</button>
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+{% endblock %}

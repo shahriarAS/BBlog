@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} BBlog {% endblock %}
+
+
+
+{% block content %}
+
+<style type="text/css">
+    .s-pageheader--home{
+        min-height: 20px;
+    }
+</style>
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+
+            <div class="col-full s-content__main">
+
+                <h3>Are you sure want to delete "<a href="{% url 'Blog_Detail' post.slug %}">{{ post.title }}</a>" ??</h3>
+                <hr>
+                {% if messages %}
+                    {% for msg in messages %}
+                        <h4 class="alert-box alert-box--info hideit">{{msg}}</h4>
+                    {% endfor %}
+                {% endif %}
+
+                <form enctype="multipart/form-data" name="cForm" id="cForm" method="POST">
+                    <fieldset>
+                          
+                          {% csrf_token %}
+                          <br><br>
+
+                        <button type="submit" class="submit btn btn--primary full-width">Delete</button>
+                        <a class="submit btn btn--primary full-width" href="{% url 'Blog_list' %}">Cancel</a>
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row top">
+
+            {% include 'Blog/include/popular.html' %}
+            {% include 'Blog/include/about_tag.html' %}
+
+    </section> <!-- end s-extra -->
+    
+{% endblock %}

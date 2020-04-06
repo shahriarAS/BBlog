@@ -1,0 +1,41 @@
+
+                <nav class="header__nav-wrap">
+
+                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                    <ul class="header__nav">
+                        <li class="current"><a href="{% url 'Blog_list' %}" title="">Home</a></li>
+                        <li class="has-children">
+                            <a href="#0" title="">Category</a>
+                            <ul class="sub-menu">
+                            {% for cat in category %}                                
+                                <li><a href="{% url 'CategoryView' cat.slug %}">{{ cat }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'AboutView' %}" title="">About</a></li>
+
+                        {% if user.is_authenticated %}
+                        <li class="has-children">
+                            <a href="#0" title="">Profile</a>
+                            <ul class="sub-menu">
+                            <li><a href="{% url 'PostNew' %}">New Post</a></li>
+                            <li><a href="{% url 'AuthorView' user.username %}">All Post</a></li>
+                            <li><a href="{% url 'ProfileView' user.username %}">Profile View</a></li>
+                            <li><a href="{% url 'ProfileUpdateView' user.username %}">Update Profile</a></li>
+                            <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                            <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="has-children">
+                            <a href="#0" title="">User</a>
+                            <ul class="sub-menu">
+                            <li><a href="{% url 'SignUpView' %}">Sign Up</a></li>
+                            <li><a href="{% url 'login' %}">login</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        
+                    </ul> <!-- end header__nav -->
