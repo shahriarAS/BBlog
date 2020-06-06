@@ -91,8 +91,8 @@ DATABASES = {
         'NAME': "dbblog",
         'USER': "shovon",
         'PASSWORD': "mynamshovon",
-        # 'HOST': "bblog-shovon.herokuapp.com",
-        'HOST' : 'localhost',
+        'HOST': "bblog-shovon.herokuapp.com",
+        # 'HOST' : 'localhost',
         'PORT': "",
     }
 }
