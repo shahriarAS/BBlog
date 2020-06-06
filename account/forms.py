@@ -11,5 +11,9 @@ class LogInForm(forms.Form):
 	username = forms.CharField(min_length=3, max_length=60, label="Username", widget=forms.TextInput(attrs={"id":"cName", "class":"full-width", "placeholder":"Type Username"}))
 	password = forms.CharField(min_length=6, label="Password", widget=forms.PasswordInput(attrs={"id":"cWebsite", "class":"full-width", "placeholder":"Type Password"}))
 
-class ProfileUpdate(forms.Form):
-	pic = forms.FileField(label="Profile Picture", required=False)
+
+class ProfileUpdate(forms.ModelForm):
+	# pic = forms.FileField(label="Profile Picture", required=False)
+	class Meta:
+		model = Author
+		fields = ["pic"]

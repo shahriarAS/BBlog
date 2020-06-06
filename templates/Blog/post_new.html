@@ -37,7 +37,7 @@
                     <fieldset>
                        
                         <div class="form-field">
-                            <input name="title" minlength="3" maxlength="30" type="text" id="cName" class="full-width" placeholder="Title">
+                            <input name="title" type="text" id="cName" class="full-width" placeholder="Title" value="">
                         </div>
 
                         <div class="form-field">
@@ -68,9 +68,10 @@
                           
                           {% csrf_token %}
 
-                        <button type="submit" class="submit btn btn--primary full-width">Save Post</button>
+                        
 
                     </fieldset>
+                    <button type="submit" class="submit btn btn--primary full-width">Submit</button>
                 </form> <!-- end form -->
 
 

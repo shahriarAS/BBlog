@@ -158,11 +158,14 @@ def PostUpdate(request, slug):
 	form = None
 	auth = Author.objects.get(username=request.user)
 	model = BlogPost.objects.get(slug=slug)
-	form = NewPostForm(request.POST or None, request.FILES or None, instance=model)
-	if form.is_valid():
-		form.save()
+	if request.method == "POST":
+		form = NewPostForm(request.POST or None, request.FILES or None, instance=model)
+		if form.is_valid():
+			form.save()
+		else:
+			print("Hoini")
 	else:
-		print("Hoini")
+		NewPostForm()
 
 	return render(request, "Blog/edit.html", {"all_post":all_post, "form":form, "model":model})
 

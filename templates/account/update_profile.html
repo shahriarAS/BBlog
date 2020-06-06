@@ -30,22 +30,7 @@
 
                         {% csrf_token %}
 
-                        <div class="form-field">
-                            <input name="first_name" minlength="3" maxlength="30" type="text" id="cName" class="full-width" placeholder="First Name" value={{ model.first_name }}>
-                        </div>
-
-                        <div class="form-field">
-                            <input name="last_name" minlength="3" maxlength="30" type="text" id="cEmail" class="full-width" placeholder="Last Name" value={{ model.last_name }}>
-                        </div>
-
-                        <div class="form-field">
-                            <input name="bio" minlength="20" maxlength="300" type="text" id="cName" class="full-width" placeholder="Bio" value={{ model.bio }}>
-                        </div>
-
-                        Profile Picture:<br>
-                        {{ form.pic }}
-
-                        <button type="submit" class="submit btn btn--primary full-width">Submit</button>
+                        {{ form.as_p }}
 
                     </fieldset>
                 </form> <!-- end form -->

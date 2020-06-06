@@ -74,16 +74,21 @@ def ProfileUpdateView(request, name):
 	form = None
 	model = Author.objects.get(username = name)
 	if request.method == "POST":
-		form = ProfileUpdate(request.POST, request.FILES)
+		form = ProfileUpdate(request.POST or None, request.FILES or None, instance=model)
 		if form.is_valid():
 			cd = form.cleaned_data
 
 			model.first_name = request.POST["first_name"]
 			model.last_name = request.POST["last_name"]
 			model.bio = request.POST["bio"]
-			model.pic = cd["pic"]
-			print(model.pic)
-			model.save()
+			if model.pic:
+				model.pic = request.POST["pic"]
+				print(model.pic)
+				form.save()
+			else:
+				model.pic = "author/profile/user-04.jpg"
+				print(model.pic)
+				form.save()
 			messages.success(request, "Successfully Updated Your Profile!")
 	else:
 		form = ProfileUpdate()

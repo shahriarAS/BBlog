@@ -1284,6 +1284,19 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 /* ------------------------------------------------------------------- 
  * ## mediaelement style overrides
  * ------------------------------------------------------------------- */
+.mejs__overlay-button {
+   background-image: url("../images/mejs/mejs-controls.svg");
+}
+
+.mejs__overlay-loading-bg-img {
+   background-image: url("../images/mejs/mejs-controls.svg");
+}
+
+.mejs__button > button {
+   background-image: url("../images/mejs/mejs-controls.svg");
+   background-color: transparent;
+   outline: none !important;
+}
 
 .audio-wrap .mejs__container {
    background-color: rgba(0, 0, 0, 0.8) !important;
@@ -1685,6 +1698,22 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 .format-video .entry__thumb a img {
    vertical-align: bottom;
 }
+
+.format-video .entry__thumb a::before {
+   content: "";
+   display: block;
+   height: 4.5rem;
+   width: 4.5rem;
+   position: absolute;
+   bottom: 3rem;
+   left: 3rem;
+   cursor: zoom-in;
+   background-image: url(../images/icons/icon-video.svg);
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-size: contain;
+}
+
 
 
 /* ===================================================================

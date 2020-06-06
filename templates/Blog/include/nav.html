@@ -8,9 +8,9 @@
                         <li class="has-children">
                             <a href="#0" title="">Category</a>
                             <ul class="sub-menu">
-                            {% for cat in category %}                                
-                                <li><a href="{% url 'CategoryView' cat.slug %}">{{ cat }}</a></li>
-                            {% endfor %}
+                                {% for categ in category %}
+                                    {{cat}}
+                                {% endfor %}
                             </ul>
                         </li>
                         <li><a href="{% url 'AboutView' %}" title="">About</a></li>
